@@ -12,7 +12,9 @@
 
 <body>
 	<?php
-		require_once("../sessions/user_logged.php");
+		require_once("../sessions/user_logged.php");        
+		$alumno = $_SESSION['alumno'];
+        require_once("../engiene/client/examen_alumno.php");
 	?>
 	<div class = "container">
 		<div id="head_menu" class="row">
@@ -50,11 +52,13 @@
 			<div id="student_info" class="col-xs-6 col-sm-3">
 				<div id="photo">
 					<img class="img-responsive" src="../images/person-flat.png" alt="person" width="100" height="100">
-					<h1>John Doe</h1>
+					<h2><?php echo $alumno->nombre." ".$alumno->appat." ".$alumno->apmat;?></h2>
 				</div>
 				<div class="personal_info">
-					<p>johndoe@gmail.com</p>
-					<p>2008600448</p>
+                    <h3>Datos personales</h3>
+                    <p>Carrera: <?php echo $alumno->carrera;?></p>
+                    <p>Boleta: <?php echo $alumno->boleta;?></p>
+					<p>E-mail: <?php echo $alumno->email;?></p>
 				</div>
 			</div>
 			<div class="tab-content">
@@ -63,23 +67,13 @@
 				</div>
 				<div id="Exams" class="col-xs-6 col-sm-9 tab-pane fade">
 					<div class="list-group">
-						<li class="list-group-item"><div id="Header"><h3>Exámenes inscritos</h3></div></li>
+						<li class="list-group-item"><div id="Header"><h3>Exámenes inscritos</h3></div>                            </li>
 							<?php
-							
+							     fillExams();
 							?>
-						<li class="list-group-item">
-							<div class="panel panel-info">
-								<div class="panel-heading">Examen A</div>
-								<div class="panel-body">
-									<div class="btn-group-vertical">
-									  <button type="button" class="btn btn-danger">Dar de baja</button>
-									</div>
-								</div>
-							</div>
-						</li>
 						<li class="list-group-item"><div id="Footpage">
 							<div class="btn-group-vertical">
-								<button type="button" class="btn btn-success">Inscribir</button>
+								<button type="button" class="btn btn-primary">Inscribir</button>
 							</div>
 						</div></li>
 					</div>
@@ -97,14 +91,9 @@
 								  </tr>
 								</thead>
 								<tbody>
-								  <tr>
-									<td>Examen A</td>
-									<td>10/12/1990</td>
-									<td>0.0</td>
-								  </tr>
 								  <?php
-										//Aquí van a inyectarse las calificaciones desde la BD
-									?>
+                                        fillCalifications();
+								    ?>
 								</tbody>
 							</table>
 						</div></li>

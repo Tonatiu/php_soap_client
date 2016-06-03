@@ -1,24 +1,38 @@
 <?php
+require_once("../engiene/client/wsdl_client.php");
+
 if(!isset($_SESSION))
 	session_start();
 
 if($_POST){
-	$pass = $_POST['user_pasw'];
-	$true_pass = "2413Warrior777";
-	$user_id = $_POST['user_name'];
-	$true_id = "2012630537";
+	$apellido = $_POST['user_lastname'];
+	$boleta = $_POST['user_name'];
 	
-	if($pass == $true_pass && $user_id == $true_id){
-		$_SESSION["user"] = $user_id;
-		echo '<script languaje="javascript">
-				self.location = "../views/home.php";
-			</script>';
+	try
+	{
+		$responce = $cliente->validar($boleta, $apellido);
+		if(!empty($responce)){
+            $responce->carrera = $cliente->getCarrera($responce->id_carrera);
+			$_SESSION['alumno'] = $responce;
+			echo '<script languaje="javascript">
+					self.location = "../views/home.php";
+				</script>';
+		}
+		else{
+			echo '<script languaje="javascript">
+					alert("Datos no válidos");
+					self.location = "../index.php"
+				</script>';
+		}
 	}
-	else{
+	catch(Esception $e)
+	{
 		echo '<script languaje="javascript">
-				alert("Datos no válidos");
-				self.location = "../index.php"
-			</script>';
+					alert("Error al validar");
+					self.location = "../index.php"
+				</script>';
 	}
+		
+	
 }
 ?>

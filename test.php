@@ -16,7 +16,8 @@
 		<?php
 			require_once("./engiene/client/wsdl_client.php");
 			//$cliente->sumar(485,1);
-			$cliente->validar("2012630537", "Trejo");
+			//$cliente->validar("2012630537", "Trejo");
+            $cliente->exam_student(2);
 		?>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>

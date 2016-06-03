@@ -26,10 +26,10 @@
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label for="password" class="col-lg-2 control-label">Contraseña</label>
+				<label for="apellido" class="col-lg-2 control-label">Apellido paterno</label>
 				<div class="col-lg-10">
-				  <input type="password" class="form-control" id="student_passwd" 
-						 placeholder="Contraseña" name="user_pasw">
+				  <input type="text" class="form-control" id="user_lastname" 
+						 placeholder="Apellido paterno" name="user_lastname">
 				</div>
 			  </div>
 

@@ -17,14 +17,33 @@ class Client{
 
 	function validar($boleta, $apellido){
 		$responce = $this->cliente->validarAlumno(array('boleta'=>$boleta, 'apellido'=>$apellido));
-		echo "<div class=\"alert alert-success\">".
-				"<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>".
-				"<strong> The result is: ".$responce->return->alumno->nombre."</strong>".
-			"</div>";
+        
+        return $responce->return->alumno;
 	}
+    
+    function exam_student($idAlumno){
+        $responce = $this->cliente->obtenerCalificacionAlumno(array('idAlumno'=>$idAlumno));
+        return $responce->return;
+    }
+    
+    function exam_signature($id_signature){
+        $responce = $this->cliente->obtenerCalificacion(array('id'=>$id_signature));
+        
+        return $responce->return->valor;
+    }
+    
+    function getExam($id_examen){
+        $responce = $this->cliente->obtenerExamen(array('idExamen'=>$id_examen));
+        return $responce->return;
+    }
+    
+    function getCarrera($id_carrera){
+        $responce = $this->cliente->obtenerCarrera(array('id'=>$id_carrera));
+        return $responce->return->nombre;
+    }
 }
 
-//$cliente = new Client("http://localhost:8080/PruebaWebService?wsdl");
+//$cliente = new Client("http://192.168.1.100:8080/Schoolsaes?wsdl");
 $cliente = new Client("http://localhost:8080/Schoolsaes?wsdl");
 
 ?>
