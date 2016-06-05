@@ -73,7 +73,7 @@
 							?>
 						<li class="list-group-item"><div id="Footpage">
                             <div class="btn-group-vertical col-xs-12 col-sm-12">
-                                <button type="button" class="btn btn-primary btn-block btn-xs" data-toggle="collapse" data-target="#exams_add">Inscribir</button>
+                                <button type="button" class="btn btn-primary btn-block btn-md" data-toggle="collapse" data-target="#exams_add">Inscribir</button>
                                 <div id="exams_add" class="collapse">
                                     <label for="sel2">Exames disponibles</label>
                                       <select multiple class="form-control" id="sel2">
@@ -81,7 +81,11 @@
                                                 fillExamByCarrier();
                                             ?>
                                       </select>
-                                    
+                                    <form class="form-horizontal" role="form" method="post">
+                                        <div class="form-group">
+                                            <button id = "validate_btn" type="submit" class="btn btn-primary">Agregar exámenes</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
 						</div></li>
