@@ -13,6 +13,8 @@ for($i = 0; $i < count($exams); $i++){
     $exams[$i]->fecha = substr($cliente->getExam($exams[$i]->id_examen)->fecha, 0, 10);
 }
 
+$exams_by_carrier = $cliente->getExamsByCarrier($alumno->id_carrera);
+
 function fillCalifications(){
     $exams = $GLOBALS['exams'];
     for($i = 0; $i < count($exams); $i++){
@@ -74,10 +76,10 @@ function fillExams(){
     
 }
 
-function fillExamByCarrier($carrier_id){
-    $exams = $cliente->getExamsByCarrier($carrier_id);
+function fillExamByCarrier(){
+    $exams = $GLOBALS['exams_by_carrier'];
     for($i = 0; $i < count($exams); $i++){
-        echo '<option> Examen: '.$exams[$i]->id.' Fecha: '.$exams[$i]->fecha.'</option>';
+        echo '<option> Examen: '.$exams[$i]->id.', Fecha: '.substr($exams[$i]->fecha, 0, 10).'</option>';
     }
 }
 
