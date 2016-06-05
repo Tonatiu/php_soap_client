@@ -35,7 +35,8 @@
 
 			  <div class="form-group">
 				<div class="col-lg-offset-2 col-lg-10 login_button">
-				  <button id = "validate_btn" type="submit" class="btn btn-default">Entrar</button>
+				  <button id = "validate_btn" type="submit" class="btn btn-primary">Entrar</button>
+                    <button id = "register_btn" type="button" class="btn btn-info" onclick="location.href='./views/sign_in.php'">Regístrate</button>
 				</div>
 			  </div>
 			</form>

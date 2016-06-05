@@ -41,6 +41,20 @@ class Client{
         $responce = $this->cliente->obtenerCarrera(array('id'=>$id_carrera));
         return $responce->return->nombre;
     }
+    
+    function getCarreras(){
+        $responce = $this->cliente->obtenerCarreras();
+        return $responce->return;
+    }
+    
+    function insertStudent($alumno){
+        $this->cliente->insertarAlumno(array('alumno'=>$alumno));
+    }
+    
+    function getExamsByCarrier($id_carrier){
+        $responce = $this->cliente->obtenerExamenesPorCarrera(array('id_carrera'=>$id_carrier));
+        return $responce->return;
+    }
 }
 
 //$cliente = new Client("http://192.168.1.100:8080/Schoolsaes?wsdl");

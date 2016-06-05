@@ -34,7 +34,7 @@ function fillExams(){
         $date_status;
         
         if($exams[$i]->calificacion >= 6.0){
-            $sign_status = "Aprovado";
+            $sign_status = "Aprobado";
         }
         elseif($exams[$i]->calificacion < 6.0){
             $sign_status = "Reprobado";
@@ -71,6 +71,17 @@ function fillExams(){
 							</div>
 						</li>';
     }
+    
+}
+
+function fillExamByCarrier($carrier_id){
+    $exams = $cliente->getExamsByCarrier($carrier_id);
+    for($i = 0; $i < count($exams); $i++){
+        echo '<option> Examen: '.$exams[$i]->id.' Fecha: '.$exams[$i]->fecha.'</option>';
+    }
+}
+
+function addExam($exam_reg){
     
 }
 ?>

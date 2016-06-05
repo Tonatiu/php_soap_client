@@ -72,9 +72,18 @@
 							     fillExams();
 							?>
 						<li class="list-group-item"><div id="Footpage">
-							<div class="btn-group-vertical">
-								<button type="button" class="btn btn-primary">Inscribir</button>
-							</div>
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#exams_add">Inscribir</button>
+                                <div id="exams_add" class="collapse">
+                                    <label for="sel2">Exames disponibles</label>
+                                      <select multiple class="form-control" id="sel2">
+                                            <?php
+                                                fillExamByCarrier($alumno->id_carrera);
+                                            ?>
+                                      </select>
+                                    
+                                </div>
+                            </div>
 						</div></li>
 					</div>
 				</div>
