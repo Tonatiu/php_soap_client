@@ -15,6 +15,7 @@
 		require_once("../sessions/user_logged.php");
         $id_examen = $_GET['examen'];
         $alumno = $_SESSION['alumno'];
+        $_SESSION['id_examen'] = $id_examen;
         require_once("../engiene/client/examen_pregunta.php");
         
 	?>
@@ -60,7 +61,7 @@
                     }
                     
                 ?>
-                <form class="form-horizontal" method="post" action="../../exams/next_question.php">
+                <form class="form-horizontal" method="post" action="../exams/next_question.php">
                     <div id="answers">
                          <?php
                             if($preguntas_count > $alumno->pregunta){
@@ -78,8 +79,9 @@
                             }
                             else{
                                 $signature = $alumno->correctas / $preguntas_count * 100;
+                                $_SESSION['calificacion'] = $signature;
                                 echo 'Tu calificación es: '.$signature.'<br><div id="next_button" >
-                                        <button id="next" type="submit" name="next" class="btn btn-primary">Calificar</button>
+                                        <button id="next" type="button" name="next" class="btn btn-primary" onclick="location.href=\'../views/home.php\'">Calificar</button>
                                     </div>';
                             }
                         ?>
