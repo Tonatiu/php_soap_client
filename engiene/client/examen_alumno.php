@@ -43,6 +43,7 @@ function fillExams(){
     for($i = 0; $i < count($exams); $i++){
         $sign_status;
         $date_status;
+        $aply_button;
         
         if($exams[$i]->calificacion >= 6.0){
             $sign_status = "Aprobado";
@@ -66,6 +67,13 @@ function fillExams(){
             $interval = date_diff($today, $exam_date);
             $date_status = "Faltan ".$interval->format('%R%a días');
         }
+        
+        if($date_status != "El examen ya ha pasado"){
+            $aply_button = '<button type="button" class="btn btn-primary btn-xs" onclick="location.href=\'../views/aply.php?examen='.$exams[$i]->id_examen.'\'">Aplicar</button>';
+        }
+        else{
+            $aply_button = '';
+        }
         echo '<li class="list-group-item">
 							<div class="panel panel-info">
 								<div class="panel-heading">'.$exams[$i]->Asignatura.'</div>
@@ -75,8 +83,9 @@ function fillExams(){
                                         '<br>
                                         Status del examen: '.$sign_status.'
                                     </div>
-									<div class="btn-group-vertical">
+									<div class="btn-group-horizontal">
 									  <button type="button" class="btn btn-danger btn-xs">Dar de baja</button>
+									  '.$aply_button.'
 									</div>
 								</div>
 							</div>

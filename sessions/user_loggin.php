@@ -13,6 +13,8 @@ if($_POST){
 		$responce = $cliente->validar($boleta, $apellido);
 		if(!empty($responce)){
             $responce->carrera = $cliente->getCarrera($responce->id_carrera);
+            $responce->pregunta = 1;
+            $responce->correctas = 0;
 			$_SESSION['alumno'] = $responce;
 			echo '<script languaje="javascript">
 					self.location = "../views/home.php";

@@ -52,6 +52,21 @@ class Client{
         $responce = $this->cliente->obtenerAsignatura(array('idAsignatura'=>$id_signature));
         return $responce->return;
     }
+    
+    function getAswerQuestion($id_examen){
+        $responce = $this->cliente->obtenerPreguntaRespuestaExamen(array('arg0'=>$id_examen));
+        return $responce->return;
+    }
+    
+    function getQuestion($id_question){
+        $responce = $this->cliente->obtenerPregunta(array('arg0'=>$id_question));
+        return $responce->return->nombre;
+    }
+    
+    function getAnswer($id_answer){
+        $responce = $this->cliente->obtenerRespuesta(array('arg0'=>$id_answer));
+        return $responce->return->nombre;
+    }
 }
 
 //$cliente = new Client("http://192.168.1.100:8080/Schoolsaes?wsdl");
