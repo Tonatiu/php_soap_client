@@ -5,22 +5,31 @@ $exams = $cliente->exam_student($alumno->id);
 
 for($i = 0; $i < count($exams); $i++){
     
-    if(!empty($exams[$i]->id_calificacion))
+    if(!empty($exams[$i]->id_calificacion)){
         $exams[$i]->calificacion = $cliente->exam_signature($exams[$i]->id_calificacion);
+        $curr_exam = $cliente->getExam($exams[$i]->id_examen);
+        $signature = $cliente->getSignature($curr_exam->idAsignatura);
+        
+        $exams[$i]->fecha = substr(($curr_exam)->fecha, 0, 10);
+        $exams[$i]->Asignatura = $signature->nombre;
+    }        
     else
         $exams[$i]->calificacion = "-";
     
-    $exams[$i]->fecha = substr($cliente->getExam($exams[$i]->id_examen)->fecha, 0, 10);
 }
 
 $exams_by_carrier = $cliente->getExamsByCarrier($alumno->id_carrera);
+
+for($i = 0; $i < count($exams_by_carrier); $i++){
+    $exams_by_carrier[$i]->Asignatura = $cliente->getSignature($exams_by_carrier[$i]->idAsignatura)->nombre;
+}
 
 function fillCalifications(){
     $exams = $GLOBALS['exams'];
     for($i = 0; $i < count($exams); $i++){
         if($exams[$i]->calificacion != "-"){
             echo '<tr>
-                <td>'.$exams[$i]->id_examen.'</td>
+                <td>'.$exams[$i]->Asignatura.'</td>
                 <td>'.$exams[$i]->fecha.'</td>
                 <td>'.$exams[$i]->calificacion.'</td>
               </tr>';
@@ -48,7 +57,7 @@ function fillExams(){
         $current_date = strtotime(date('Y-m-d'));
         $compare_date = strtotime($exams[$i]->fecha);
         
-        if($current_date > $compare_date && $exams[$i]->calificacion === "-"){
+        if($current_date > $compare_date || $exams[$i]->calificacion === "-"){
             $date_status = "El examen ya ha pasado";
         }
         else{
@@ -59,7 +68,7 @@ function fillExams(){
         }
         echo '<li class="list-group-item">
 							<div class="panel panel-info">
-								<div class="panel-heading">'.$exams[$i]->id_examen.'</div>
+								<div class="panel-heading">'.$exams[$i]->Asignatura.'</div>
 								<div class="panel-body">
                                     <div id="exam_info">
                                         Fecha del examen: '.$exams[$i]->fecha.'    '.$date_status.
@@ -79,7 +88,7 @@ function fillExams(){
 function fillExamByCarrier(){
     $exams = $GLOBALS['exams_by_carrier'];
     for($i = 0; $i < count($exams); $i++){
-        echo '<option> Examen: '.$exams[$i]->id.', Fecha: '.substr($exams[$i]->fecha, 0, 10).'</option>';
+        echo '<option> Examen: '.$exams[$i]->Asignatura.', Fecha: '.substr($exams[$i]->fecha, 0, 10).'</option>';
     }
 }
 

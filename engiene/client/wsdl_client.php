@@ -6,14 +6,6 @@ class Client{
 	function __construct($wsdl){
 		$this->cliente = new SoapClient($wsdl);
 	}
-	
-	function sumar($param_1, $param_2){
-		$responce = $this->cliente->suma(array('a'=>$param_1, 'b'=>$param_2));
-		echo "<div class=\"alert alert-success\">".
-				"<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>".
-				"<strong> The result is: ".$responce->return."</strong>".
-			"</div>";
-	}
 
 	function validar($boleta, $apellido){
 		$responce = $this->cliente->validarAlumno(array('boleta'=>$boleta, 'apellido'=>$apellido));
@@ -53,6 +45,11 @@ class Client{
     
     function getExamsByCarrier($id_carrier){
         $responce = $this->cliente->obtenerExamenesPorCarrera(array('id_carrera'=>$id_carrier));
+        return $responce->return;
+    }
+    
+    function getSignature($id_signature){
+        $responce = $this->cliente->obtenerAsignatura(array('idAsignatura'=>$id_signature));
         return $responce->return;
     }
 }
